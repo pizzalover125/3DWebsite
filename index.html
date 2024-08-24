@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <style>
+      a-scene {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <a-scene>
+      <a-sky color="#000"></a-sky>
+
+      <a-sphere id="sun" position="0 2 -10" radius="2" color="#FFD700"></a-sphere>
+
+      <a-sphere id="mercury" position="0 2 -10" radius="0.1" color="#6C6C6C">
+        <a-animation 
+          attribute="rotation" 
+          to="0 360 0" 
+          dur="600" 
+          repeat="indefinite"
+          easing="linear">
+        </a-animation>
+      </a-sphere>
+
+      <a-sphere id="venus" position="0 2 -10" radius="0.2" color="#F5B041">
+        <a-animation 
+          attribute="rotation" 
+          to="0 360 0" 
+          dur="1000" 
+          repeat="indefinite"
+          easing="linear">
+        </a-animation>
+      </a-sphere>
+
+      <a-sphere id="earth" position="0 2 -10" radius="0.2" color="#4682B4">
+        <a-animation 
+          attribute="rotation" 
+          to="0 360 0" 
+          dur="2000" 
+          repeat="indefinite"
+          easing="linear">
+        </a-animation>
+      </a-sphere>
+
+      <a-sphere id="mars" position="0 2 -10" radius="0.1" color="#E57373">
+        <a-animation 
+          attribute="rotation" 
+          to="0 360 0" 
+          dur="1600" 
+          repeat="indefinite"
+          easing="linear">
+        </a-animation>
+      </a-sphere>
+
+      <a-sphere id="jupiter" position="0 2 -10" radius="0.7" color="#F5B041">
+        <a-animation 
+          attribute="rotation" 
+          to="0 360 0" 
+          dur="2400" 
+          repeat="indefinite"
+          easing="linear">
+        </a-animation>
+      </a-sphere>
+
+      <a-sphere id="saturn" position="0 2 -10" radius="0.6" color="#F4A460">
+        <a-animation 
+          attribute="rotation" 
+          to="0 360 0" 
+          dur="3000" 
+          repeat="indefinite"
+          easing="linear">
+        </a-animation>
+      </a-sphere>
+
+      <a-sphere id="uranus" position="0 2 -10" radius="0.3" color="#87CEFA">
+        <a-animation 
+          attribute="rotation" 
+          to="0 360 0" 
+          dur="4000" 
+          repeat="indefinite"
+          easing="linear">
+        </a-animation>
+      </a-sphere>
+
+      <a-sphere id="neptune" position="0 2 -10" radius="0.3" color="#4169E1">
+        <a-animation 
+          attribute="rotation" 
+          to="0 360 0" 
+          dur="5000" 
+          repeat="indefinite"
+          easing="linear">
+        </a-animation>
+      </a-sphere>
+
+      <a-camera wasd-controls="enabled: true"></a-camera>
+
+      <script>
+        function updatePlanetPosition(planet, radius, speed) {
+          const now = Date.now() * 0.0001 * speed;
+          const x = radius * Math.cos(now);
+          const z = radius * Math.sin(now);
+          planet.setAttribute('position', `${x} 2 ${z - 10}`);
+        }
+
+        const mercury = document.querySelector('#mercury');
+        const venus = document.querySelector('#venus');
+        const earth = document.querySelector('#earth');
+        const mars = document.querySelector('#mars');
+        const jupiter = document.querySelector('#jupiter');
+        const saturn = document.querySelector('#saturn');
+        const uranus = document.querySelector('#uranus');
+        const neptune = document.querySelector('#neptune');
+
+        function animate() {
+          updatePlanetPosition(mercury, 2, 6);
+          updatePlanetPosition(venus, 3, 4);
+          updatePlanetPosition(earth, 4, 3);
+          updatePlanetPosition(mars, 5, 2.5);
+          updatePlanetPosition(jupiter, 7, 1.5);
+          updatePlanetPosition(saturn, 9, 1);
+          updatePlanetPosition(uranus, 11, 0.7);
+          updatePlanetPosition(neptune, 13, 0.5);
+
+          requestAnimationFrame(animate);
+        }
+        animate();
+      </script>
+    </a-scene>
+  </body>
+</html>

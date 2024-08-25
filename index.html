@@ -13,8 +13,11 @@
     <a-scene>
       <a-sky color="#000"></a-sky>
 
+      <!-- Sun -->
       <a-sphere id="sun" position="0 2 -10" radius="2" color="#FFD700"></a-sphere>
 
+      <!-- Planets and their orbits -->
+      <a-ring id="orbit-mercury" position="0 2 -10" radius-inner="2.05" radius-outer="2.1" rotation="90 0 0" color="#888" visible="false"></a-ring>
       <a-sphere id="mercury" position="0 2 -10" radius="0.1" color="#6C6C6C">
         <a-animation 
           attribute="rotation" 
@@ -25,6 +28,7 @@
         </a-animation>
       </a-sphere>
 
+      <a-ring id="orbit-venus" position="0 2 -10" radius-inner="3.05" radius-outer="3.1" rotation="90 0 0" color="#888" visible="false"></a-ring>
       <a-sphere id="venus" position="0 2 -10" radius="0.2" color="#F5B041">
         <a-animation 
           attribute="rotation" 
@@ -35,7 +39,8 @@
         </a-animation>
       </a-sphere>
 
-      <a-sphere id="earth" position="0 2 -10" radius="0.2" color="#4682B4">
+      <a-ring id="orbit-earth" position="0 2 -10" radius-inner="4.05" radius-outer="4.1" rotation="90 0 0" color="#888" visible="false"></a-ring>
+      <a-sphere  id="earth" position="0 2 -10" radius="0.2" color="#4682B4">
         <a-animation 
           attribute="rotation" 
           to="0 360 0" 
@@ -45,6 +50,7 @@
         </a-animation>
       </a-sphere>
 
+      <a-ring id="orbit-mars" position="0 2 -10" radius-inner="5.05" radius-outer="5.1" rotation="90 0 0" color="#888" visible="false"></a-ring>
       <a-sphere id="mars" position="0 2 -10" radius="0.1" color="#E57373">
         <a-animation 
           attribute="rotation" 
@@ -55,6 +61,7 @@
         </a-animation>
       </a-sphere>
 
+      <a-ring id="orbit-jupiter" position="0 2 -10" radius-inner="7.05" radius-outer="7.1" rotation="90 0 0" color="#888" visible="false"></a-ring>
       <a-sphere id="jupiter" position="0 2 -10" radius="0.7" color="#F5B041">
         <a-animation 
           attribute="rotation" 
@@ -65,6 +72,7 @@
         </a-animation>
       </a-sphere>
 
+      <a-ring id="orbit-saturn" position="0 2 -10" radius-inner="9.05" radius-outer="9.1" rotation="90 0 0" color="#888" visible="false"></a-ring>
       <a-sphere id="saturn" position="0 2 -10" radius="0.6" color="#F4A460">
         <a-animation 
           attribute="rotation" 
@@ -75,6 +83,7 @@
         </a-animation>
       </a-sphere>
 
+      <a-ring id="orbit-uranus" position="0 2 -10" radius-inner="11.05" radius-outer="11.1" rotation="90 0 0" color="#888" visible="false"></a-ring>
       <a-sphere id="uranus" position="0 2 -10" radius="0.3" color="#87CEFA">
         <a-animation 
           attribute="rotation" 
@@ -85,6 +94,7 @@
         </a-animation>
       </a-sphere>
 
+      <a-ring id="orbit-neptune" position="0 2 -10" radius-inner="13.05" radius-outer="13.1" rotation="90 0 0" color="#888" visible="false"></a-ring>
       <a-sphere id="neptune" position="0 2 -10" radius="0.3" color="#4169E1">
         <a-animation 
           attribute="rotation" 
@@ -98,11 +108,12 @@
       <a-camera wasd-controls="enabled: true"></a-camera>
 
       <script>
-        function updatePlanetPosition(planet, radius, speed) {
+        function updatePlanetPosition(planet, orbit, radius, speed) {
           const now = Date.now() * 0.0001 * speed;
           const x = radius * Math.cos(now);
           const z = radius * Math.sin(now);
           planet.setAttribute('position', `${x} 2 ${z - 10}`);
+          orbit.setAttribute('visible', true);
         }
 
         const mercury = document.querySelector('#mercury');
@@ -114,15 +125,24 @@
         const uranus = document.querySelector('#uranus');
         const neptune = document.querySelector('#neptune');
 
+        const orbitMercury = document.querySelector('#orbit-mercury');
+        const orbitVenus = document.querySelector('#orbit-venus');
+        const orbitEarth = document.querySelector('#orbit-earth');
+        const orbitMars = document.querySelector('#orbit-mars');
+        const orbitJupiter = document.querySelector('#orbit-jupiter');
+        const orbitSaturn = document.querySelector('#orbit-saturn');
+        const orbitUranus = document.querySelector('#orbit-uranus');
+        const orbitNeptune = document.querySelector('#orbit-neptune');
+
         function animate() {
-          updatePlanetPosition(mercury, 2, 6);
-          updatePlanetPosition(venus, 3, 4);
-          updatePlanetPosition(earth, 4, 3);
-          updatePlanetPosition(mars, 5, 2.5);
-          updatePlanetPosition(jupiter, 7, 1.5);
-          updatePlanetPosition(saturn, 9, 1);
-          updatePlanetPosition(uranus, 11, 0.7);
-          updatePlanetPosition(neptune, 13, 0.5);
+          updatePlanetPosition(mercury, orbitMercury, 2, 6);
+          updatePlanetPosition(venus, orbitVenus, 3, 4);
+          updatePlanetPosition(earth, orbitEarth, 4, 3);
+          updatePlanetPosition(mars, orbitMars, 5, 2.5);
+          updatePlanetPosition(jupiter, orbitJupiter, 7, 1.5);
+          updatePlanetPosition(saturn, orbitSaturn, 9, 1);
+          updatePlanetPosition(uranus, orbitUranus, 11, 0.7);
+          updatePlanetPosition(neptune, orbitNeptune, 13, 0.5);
 
           requestAnimationFrame(animate);
         }
